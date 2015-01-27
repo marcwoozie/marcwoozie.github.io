@@ -1,8 +1,3 @@
-<link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
-<link rel="import" href="bower_components/core-icons/core-icons.html">
-<link rel="import" href="bower_components/core-input/core-input.html">
-<link rel="import" href="bower_components/polymer/polymer.html">
 <polymer-element name="todo-task" attributes="task index">
   <template>
     <style>
@@ -10,12 +5,14 @@
         display: block;
       }
     </style>
-    <div>
-      <core-icon-button icon="{{task.done ? 'check' : 'check-box-outline-blank'}}" on-click="{{toggle}}"></core-icon-button>
-      <input on-click="save" type="text" is="core-input" value="{{task.title}}" placeholder="task name">
-      <core-icon-button icon="delete" on-click="{{delete}}"></core-icon-button>
+    <div class="send-message" layout horizontal>
+      <core-icon-button style="padding:13px 16px 0;" icon="{{task.done ? 'check' : 'check-box-outline-blank'}}" on-click="{{toggle}}"></core-icon-button>
+      <paper-input flex label="task title" id="input" value="{{task.title}}"></paper-input>
+      <!-- <input on-click="save" type="text" is="core-input" value="{{task.title}}" placeholder="task name"> -->
+      <core-icon-button style="padding:13px 16px 0;" icon="delete" on-click="{{delete}}"></core-icon-button>
     </div>
   </template>
+
 </polymer-element>
 <script>
 Polymer('todo-task', {

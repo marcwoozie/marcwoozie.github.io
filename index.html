@@ -3,19 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>Polymer App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="bower_components/polymer/polymer.html">
+
+  <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+  <link rel="import" href="bower_components/core-item/core-item.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+  <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="bower_components/core-icons/core-icons.html">
+  <link rel="import" href="bower_components/core-input/core-input.html">
+
   <link rel="import" href="todo.task.html">
 </head>
-<body>
+<body fullbleed unresolved>
   <template is="auto-binding" id="template">
-    <template repeat="{{task, i in tasks}}">
-      <todo-task task="{{task}}" index="{{i}}" on-task-deleted="{{deleteTask}}"></todo-task>
-    </template>
-    <core-icon-button icon="add" on-click="{{addTask}}"></core-icon-button>
-    <div>
-      <core-icon-button icon="save" on-click="{{taskSave}}"></core-icon-button>
-      <core-icon-button icon="delete" on-click="{{allDelete}}"></core-icon-button>
-    </div>
+
+
+    <core-scaffold>
+
+      <!-- ドロウアーパネル -->
+      <core-header-panel navigation flex>
+        <core-toolbar class="tall">
+          <!-- an avatar and username will be here -->
+        </core-toolbar>
+      </core-header-panel>
+
+      <!-- アプリのタイトル -->
+      <div tool layout horizontal flex>
+        <span flex>TODO APP</span>
+        <core-icon-button icon="save" on-click="{{taskSave}}"></core-icon-button>
+        <span><!-- number of people online --></span>
+      </div>
+
+      <section layout vertical fit>
+        <div style="overflow: scroll; padding-bottom: 15px;" flex class="chat-list">
+          <template repeat="{{task, i in tasks}}">
+            <todo-task task="{{task}}" index="{{i}}" on-task-deleted="{{deleteTask}}"></todo-task>
+          </template>
+          <!-- <core-icon-button icon="add" on-click="{{addTask}}"></core-icon-button> -->
+          <div>
+
+            <core-icon-button icon="delete" on-click="{{allDelete}}"></core-icon-button>
+          </div>
+        </div>
+
+        <div style="padding: 7px 10px;" class="send-message" layout horizontal>
+          <paper-input style="padding-right: 10px;" flex="" label="Type message..." id="input" value="{{task.title}}"></paper-input>
+          <paper-fab icon="add" id="sendButton" on-click="{{addTask}}" role="button" tabindex="0" aria-label="send"></paper-fab>
+        </div>
+      </section>
+
+
+    </core-scaffold>
+
   </template>
 
   <script charset="utf-8">
