@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polymer App</title>
+  <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="todo.task.html">
+</head>
+<body>
+  <template is="auto-binding" id="template">
+    <template repeat="{{task, i in tasks}}">
+      <todo-task task="{{task}}" index="{{i}}" on-task-deleted="{{deleteTask}}"></todo-task>
+    </template>
+    <core-icon-button icon="add" on-click="{{addTask}}"></core-icon-button>
+    <div>
+      <core-icon-button icon="save" on-click="{{taskSave}}"></core-icon-button>
+      <core-icon-button icon="delete" on-click="{{allDelete}}"></core-icon-button>
+    </div>
+  </template>
+
+  <script charset="utf-8">
+
+    ;(function(){
+      'use strict';
+      var strageTask;
+
+      template.deleteTask = function(e, detail, sender) {
+        strageTask = JSON.parse(localStorage.getItem("tasks"));
+        strageTask.splice(sender.index, 1);
+        localStorage.setItem("tasks", JSON.stringify(strageTask));
+        template.tasks = strageTask;
+      };
+
+      template.addTask = function(e, detail, sender) {
+        template.tasks.push({done: false, title: ""});
+        localStorage.setItem("tasks", JSON.stringify( template.tasks ));
+      };
+
+      template.taskSave = function(e, detail, sender) {
+        alert("save tasks");
+        localStorage.setItem("tasks", JSON.stringify(template.tasks));
+      };
+
+      template.allDelete = function(e, detail, sender) {
+        if( confirm("are you sure?") ) {
+          localStorage.setItem("tasks", JSON.stringify([]));
+          template.tasks = JSON.parse(localStorage.getItem("tasks"));
+        }
+      }
+
+      window.onload = function() {
+        if( (localStorage.getItem("tasks") === "") || !( JSON.parse(localStorage.getItem("tasks")) instanceof Array) ){
+          localStorage.clear();
+        }
+        var template = document.querySelector("#template");
+        var myStorage = localStorage.getItem("tasks");
+        template.tasks = myStorage == null ? [] : JSON.parse(myStorage);
+      };
+
+    })();
+
+  </script>
+
+</body>
+</html>

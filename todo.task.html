@@ -1,0 +1,32 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="bower_components/core-icons/core-icons.html">
+<link rel="import" href="bower_components/core-input/core-input.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
+<polymer-element name="todo-task" attributes="task index">
+  <template>
+    <style>
+      :host{
+        display: block;
+      }
+    </style>
+    <div>
+      <core-icon-button icon="{{task.done ? 'check' : 'check-box-outline-blank'}}" on-click="{{toggle}}"></core-icon-button>
+      <input on-click="save" type="text" is="core-input" value="{{task.title}}" placeholder="task name">
+      <core-icon-button icon="delete" on-click="{{delete}}"></core-icon-button>
+    </div>
+  </template>
+</polymer-element>
+<script>
+Polymer('todo-task', {
+  toggle: function(e, detail, sender) {
+    this.task.done = !this.task.done;
+  },
+  delete: function(e, detail, sender) {
+    this.fire("task-deleted")
+  },
+  save: function(e, detail, sender) {
+    this.fire("task-save");
+  }
+});
+</script>
