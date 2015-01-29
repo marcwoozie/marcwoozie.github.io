@@ -4,12 +4,40 @@
       :host{
         display: block;
       }
+      .task-name{
+        width: 100%;
+      }
+      .item {
+        margin: 1em 1em 1em .5em;
+      }
+      .card {
+        background-color: #fff;
+        padding: 1em;
+      }
+      .done{
+        color: green;
+      }
+      .btn{
+        float: right;
+      }
+      .btn + .btn{
+        margin-right: 20px;
+      }
+      .time{
+        font-size: 11px;
+        color: #ccc;
+      }
     </style>
-    <div class="send-message" layout horizontal>
-      <core-icon-button style="padding:13px 16px 0;" icon="{{task.done ? 'check' : 'check-box-outline-blank'}}" on-click="{{toggle}}"></core-icon-button>
-      <paper-input flex label="task title" id="input" value="{{task.title}}"></paper-input>
-      <!-- <input on-click="save" type="text" is="core-input" value="{{task.title}}" placeholder="task name"> -->
-      <core-icon-button style="padding:13px 16px 0;" icon="delete" on-click="{{delete}}"></core-icon-button>
+    <div layout horizontal>
+      <div flex center horizontal layout class="item">
+        <core-icon-button class="check-icon {{task.done ? 'done' : ''}}" icon="{{task.done ? 'check' : 'check-box-outline-blank'}}" on-click="{{toggle}}"></core-icon-button>
+        <paper-shadow z="1" flex class="card">
+          <span class="time">{{task.modified}}</span>
+          <paper-input flex class="task-name" label="Title" value="{{task.title}}"></paper-input>
+          <core-icon-button class="btn" icon="delete" on-click="{{delete}}"></core-icon-button>
+          <core-icon-button class="btn" id="save-btn" icon="save" on-click="{{save}}"></core-icon-button>
+        </paper-shadow>
+      </div>
     </div>
   </template>
 

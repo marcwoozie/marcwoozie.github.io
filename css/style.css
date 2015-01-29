@@ -1,0 +1,25 @@
+#send-btn{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+}
+
+#save-btn{
+  margin: 0;
+  padding: 0;
+}
+
+#task-list{
+  overflow: scroll;
+  padding: 30px 0 0;
+}
+
+[navigation] core-toolbar {
+  background-color: #4F7DC9;
+  color: #fff;
+}
+
+#all-delete{
+  padding: 10px;
+}
