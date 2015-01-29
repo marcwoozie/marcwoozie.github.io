@@ -16,6 +16,7 @@
   }
 
   template.deleteTask = function(e, detail, sender) {
+    if( !confirm("are you sure?") ) return false;
     strageTask = JSON.parse(localStorage.getItem("tasks"));
     strageTask.splice(sender.index, 1);
     localStorage.setItem("tasks", JSON.stringify(strageTask));
@@ -46,14 +47,13 @@
   };
 
   template.checkedDeleted = function(e, detail, sender) {
-    if( confirm("are you sure?") ) {
-      strageTask = [];
-      for(var i = 0; i <= template.tasks.length - 1; i++){
-        if( !template.tasks[i].done ) strageTask.push(template.tasks[i]);
-      }
-      localStorage.setItem("tasks", JSON.stringify(strageTask));
-      template.tasks = JSON.parse(localStorage.getItem("tasks"));
+    if( !confirm("are you sure?") ) return false;
+    strageTask = [];
+    for(var i = 0; i <= template.tasks.length - 1; i++){
+      if( !template.tasks[i].done ) strageTask.push(template.tasks[i]);
     }
+    localStorage.setItem("tasks", JSON.stringify(strageTask));
+    template.tasks = JSON.parse(localStorage.getItem("tasks"));
   }
 
   window.onload = function() {
