@@ -20,6 +20,9 @@
 </head>
 <body fullbleed unresolved>
   <template is="auto-binding" id="template">
+
+    <paper-fab icon="add" id="send-btn" on-click="{{addTask}}" role="button"></paper-fab>
+
     <core-scaffold>
 
       <core-header-panel navigation flex>
@@ -35,7 +38,6 @@
       </div>
 
       <section layout vertical fit>
-        <paper-fab icon="add" id="send-btn" on-click="{{addTask}}" role="button"></paper-fab>
         <div flex id="task-list" class="chat-list">
           <template repeat="{{task, i in tasks}}">
             <todo-task class="task" task="{{task}}" index="{{i}}" on-task-deleted="{{deleteTask}}" on-task-save="{{saveTask}}"></todo-task>
